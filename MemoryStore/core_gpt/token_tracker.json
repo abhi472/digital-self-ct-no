@@ -1,0 +1,11 @@
+{
+  "total_tokens": 2000,
+  "sessions": [
+    {
+      "session_id": "2025-04-08-01",
+      "tokens": 2000,
+      "persona": "core_gpt",
+      "note": "Vision and memory architecture bootstrapped"
+    }
+  ]
+}
