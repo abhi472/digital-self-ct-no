@@ -16,7 +16,7 @@ digital-self-ct-no/
 │   └── agentic_config.json              # Contains config cadence settings (e.g., rehydration reminder cadence)
 │
 ├── config/
-│   └── daily_goal_check.yml             # GitHub Actions logic (optional to relocate from .github/workflows)
+│   └── daily_goal_check.yml             # Optional duplicate for visibility (actual action lives in .github/workflows)
 │
 ├── .github/
 │   └── workflows/
@@ -34,7 +34,7 @@ digital-self-ct-no/
 
 ---
 
-## 🧩 Key Files Explained
+## 🤩 Key Files Explained
 
 ### ✅ `core/CT-NO_Ready_Rehydration.md`
 
@@ -42,12 +42,14 @@ digital-self-ct-no/
 
 * Paste this at the start of a ChatGPT session to reload your state.
 * Keep it updated after major decisions, persona additions, or restructuring.
+* Includes recent system upgrades such as GitHub Action integration.
 
 ### ✅ `core/memory_log.md`
 
 > **Purpose:** A journal of DigitalSelf activity.
 
 * Log goals, decisions, and reflections daily.
+* Includes a `goal_status` for use in automation.
 * Becomes the primary mental trace for your digital brain.
 
 ### ✅ `core/token_tracker.json`
@@ -55,7 +57,7 @@ digital-self-ct-no/
 > **Purpose:** Track total token usage to avoid overflowing LLM context limits.
 
 * Use `update_token_tracker.py` after each session to log persona activity.
-* Also includes timestamps and per-session tracking.
+* Tracks tokens per session and updates the timestamp.
 
 ### ✅ `core/agentic_memory.json`
 
@@ -87,11 +89,11 @@ digital-self-ct-no/
 >
 > **Trigger:** Every day at 9 PM UTC.
 >
-> **Action:** If goal not marked as `goal_status: done` in `agentic_log.md`, sends an email reminder.
+> **Action:** If goal not marked as `goal_status: done` in `memory_log.md`, sends an email reminder.
 
 ### ✅ What it checks:
 
-* Looks in `personas/agentic_core_gpt/agentic_log.md`
+* Looks in `core/memory_log.md`
 * Extracts today's entry using date
 * Checks if `goal_status: done`
 * If missing/incomplete, sends email via GitHub Actions
