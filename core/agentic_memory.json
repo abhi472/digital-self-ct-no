@@ -1,0 +1,25 @@
+{
+  "last_checkin": "2025-05-13",
+  "session_staleness": {
+    "core_gpt": 0,
+    "dsa_buddy": 15,
+    "ml_tutor": 23,
+    "therapist": 20
+  },
+  "token_tracker_snapshot": {
+    "total_tokens": 19000,
+    "last_update": "2025-05-13"
+  },
+  "last_ct_no_update": "2025-05-13",
+  "known_shortcomings": [
+    "Lazy, bound to current lifestyle",
+    "Overcommits, underdelivers",
+    "Fails personal promises"
+  ],
+  "goal_tracking": {
+    "dsa_progress": "on track",
+    "ml_learning": "slightly behind",
+    "emotional_resilience": "needs attention"
+  },
+  "pattern_notes": "User's DSA progress is stalled, likely due to distraction. Needs periodic check-ins for focus."
+}

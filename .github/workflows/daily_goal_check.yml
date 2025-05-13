@@ -1,0 +1,51 @@
+name: Daily Agentic Goal Check
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # Every day at 9 PM UTC
+
+jobs:
+  check_goal_and_email:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Read agentic_log.md and check today's status
+      id: check_goal
+      run: |
+        LOG_FILE="core/agentic_log.md"
+        TODAY=$(date -u +%Y-%m-%d)
+
+        if grep -q "### $TODAY" "$LOG_FILE"; then
+          STATUS=$(awk "/### $TODAY/,/### /" "$LOG_FILE" | grep goal_status | head -1 | cut -d':' -f2 | tr -d '[:space:]')
+          if [[ "$STATUS" == "done" ]]; then
+            echo "goal_complete=true" >> $GITHUB_OUTPUT
+          else
+            echo "goal_complete=false" >> $GITHUB_OUTPUT
+          fi
+        else
+          echo "goal_complete=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Send Email if goal not completed
+      if: steps.check_goal.outputs.goal_complete == 'false'
+      uses: peter-evans/send-email@v1
+      with:
+        smtp_server: live.smtp.mailtrap.io  # Example for Mailtrap or SendGrid
+        smtp_port: 587
+        smtp_username: ${{ secrets.SMTP_USERNAME }}
+        smtp_password: ${{ secrets.SMTP_PASSWORD }}
+        to: adu49vy1@gmail.com
+        from: hello@demomailtrap.co
+        subject: "⚠️ You missed your Agentic GPT goal today!"
+        body: |
+          Hey, it looks like you didn't complete or log your goal for today in `agentic_log.md`.
+
+          Please check and reflect:
+          - Did you forget to update the log?
+          - Was the goal too ambitious or unclear?
+          - Is your system slipping?
+
+          Refocus tomorrow. Let the Agent be your anchor.
